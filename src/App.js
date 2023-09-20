@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import './style.css';
+import { useState } from 'react';
+import Accordion from "./components/Accordion";
+import ChoiceBar from "./components/ChoiceBar";
+import triviaResults from './api';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+function App(){
+
+const [trivias, setTrivias] = useState([]);
+
+    const handleSubmit = async () => {
+        const results = await triviaResults();
+        setTrivias(results);
+        console.log(results)
+    }
+
+    return (
+        <div>
+            <ChoiceBar onSubmit={handleSubmit}/>
+            <Accordion trivias={trivias}/>
+        </div>
+    )
+};
 
 export default App;
