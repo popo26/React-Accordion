@@ -8,17 +8,22 @@ import triviaResults from './api';
 function App(){
 
 const [trivias, setTrivias] = useState([]);
+const [doneFirstQuiz, setDoneFirstQuiz] = useState(false)
 
     const handleSubmit = async () => {
         const results = await triviaResults();
         setTrivias(results);
         console.log(results)
-    }
+        setDoneFirstQuiz(true);
+    };
+
+    const greeting = <h1 className="greeting">Welcome to Trivia!</h1>
 
     return (
         <div>
             <ChoiceBar onSubmit={handleSubmit}/>
-            <Accordion trivias={trivias}/>
+            {doneFirstQuiz ? <Accordion trivias={trivias}/> : greeting }
+           
         </div>
     )
 };
