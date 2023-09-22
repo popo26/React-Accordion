@@ -1,49 +1,36 @@
-import { useState } from "react";
 import he from 'he';
-import { GoChevronDown, GoChevronLeft } from "react-icons/go";
+import { RxTriangleDown, RxTriangleLeft } from "react-icons/rx";
 
-function Accordion({ trivias }) {
-    const [expandedIndex, setExpandedIndex] = useState(-1);
-
-    const handleClick = (passedIndex => {
-        setExpandedIndex((currentExpandedIndex) => {
-            if (currentExpandedIndex === passedIndex) {
-                return -1;
-            } else {
-                return passedIndex;
-            }
-        })
-    });
+function Accordion({ trivias, expandedIndex, handleExpand, isTimerStarted }) {
 
     const renderedItems = trivias.map((trivia, index) => {
         const isExpanded = index === expandedIndex;
 
         const icon = <span className="icon">
-            {isExpanded ? <GoChevronDown /> : <GoChevronLeft />}
+            {isExpanded ? <RxTriangleDown /> : <RxTriangleLeft />}
         </span>
 
         return (
             <div className="accordion" key={index}>
-                    <div onClick={() => { handleClick(index) }} className="question-div">
-                        {he.decode(trivia.question)}
-                        {icon}
-                    </div>
-             
+                <div onClick={() => { handleExpand(index) }} className="question-div">
+                    <div className="trivia-question">{he.decode(trivia.question)} <span className="span"> {icon}</span> </div>
+                </div>
 
                 {isExpanded &&
                     <div className="answer-div">
-                        <p>{he.decode(trivia.correct_answer)}</p>
+                        <p className="answer">{he.decode(trivia.correct_answer)}</p>
                         <p>Level: {trivia.difficulty}</p>
                     </div>
                 }
             </div>
-
-
         )
-    })
+    });
 
     return (
-        <div className="accordion accordion-flush accordion-div" id="accordionFlushExample">{renderedItems}</div>
+        <div
+            className="accordion accordion-flush accordion-div"
+            id="accordionFlushExample">{renderedItems}
+        </div>
     )
 };
 
