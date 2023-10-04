@@ -92,7 +92,6 @@ body {
     background-color: rgb(64, 64, 64, 0.8);
     font-family: 'Russo One', sans-serif;
     border-radius: 20px;
-    ;
     color: #2b242b;
 }
 
@@ -113,8 +112,46 @@ body {
     font-family: 'Russo One', sans-serif;
 }
 
+/* Media query experiments with portrait and landscape - incomplete */
+/* https://css-tricks.com/snippets/css/media-queries-for-standard-devices/ */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width:920px),
+screen and (max-height: 420px){
+
+        .trivia-btn {
+        font-size: 26px;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .timer {
+        font-size: 40px;
+    }
+
+    .accordion-div {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .question-div {
+        font-size: 1rem;
+        padding: 0px;
+    }
+
+    .answer {
+        font-size: 1.2rem;
+    }
+
+    .greeting {
+        font-size: 80px;
+    }
+}
+
+
+
+@media screen and (max-width: 768px),
+screen and (max-height: 370px) {
     .trivia-btn {
         font-size: 40px;
         margin: 20px;
@@ -143,15 +180,19 @@ body {
 
 @media screen and (max-width: 576px) {
 
-    .answer-div {
+    .accordion-div {
+        width: 96%;
+        margin: auto;
         padding: 10px;
-        background-color: rgb(64, 64, 64, 0.8);
-        font-family: 'Russo One', sans-serif;
-        border-radius: 20px;
-        color: #2b242b;
     }
 
     .greeting {
         font-size: 70px;
     }
+
+    .trivia-question {
+        font-size:1rem;
+    }
 }
+
+
